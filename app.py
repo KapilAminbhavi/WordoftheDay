@@ -16,11 +16,10 @@ def explain_word(word):
             Explain the word '{word}' for my elderly grandfather who is learning English. Please follow these steps:
 
             * PRONUNCIATION:
-               - Break down the pronunciation of '{word}' using Marathi script (Devanagari).
+               - Break down the pronunciation of '{word}'.
                - Separate each syllable with a hyphen.
                - Ensure the breakdown accurately represents the English pronunciation.
                - If there are sounds in English that don't exist in Marathi, use the closest approximation and explain the difference.
-               - Provide stress indication by underlining the stressed syllable in the Marathi script.
                - Example format: word (मरा-ठी-ब्रेक-डाउन)
 
             -------------------------------------------------------------------------------------------------

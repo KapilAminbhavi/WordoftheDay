@@ -5,7 +5,6 @@ import os
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def explain_word(word):
-
     messages = [
         {
             "role": "system",
@@ -67,47 +66,32 @@ st.title("English-Marathi Dictionary for SHASHI")
 
 word = st.text_input("Enter an English word you'd like to learn:")
 
-if word:
-    st.write(f"### Word: {word}")
+# Add an "Enter" button to submit the word
+if st.button("Enter"):
+    if word:
+        st.write(f"### Word: {word}")
 
-    try:
-        with st.spinner("Fetching explanation..."):
-            explanation = explain_word(word)
+        try:
+            with st.spinner("Fetching explanation..."):
+                explanation = explain_word(word)
 
-        st.markdown(explanation)
+            st.markdown(explanation)
 
-        # Add a feature to save favorite words
-        if st.button("Add to Favorites"):
-            favorites = st.session_state.get('favorites', [])
-            if word not in favorites:
-                favorites.append(word)
-                st.session_state.favorites = favorites
-                st.success(f"'{word}' added to favorites!")
-            else:
-                st.info(f"'{word}' is already in your favorites.")
+            # Add a feature to save favorite words
+            if st.button("Add to Favorites"):
+                favorites = st.session_state.get('favorites', [])
+                if word not in favorites:
+                    favorites.append(word)
+                    st.session_state.favorites = favorites
+                    st.success(f"'{word}' added to favorites!")
+                else:
+                    st.info(f"'{word}' is already in your favorites.")
 
-        # Display favorite words
-        if 'favorites' in st.session_state and st.session_state.favorites:
-            st.markdown("### Your Favorite Words:")
-            for fav_word in st.session_state.favorites:
-                st.write(f"- {fav_word}")
+            # Display favorite words
+            if 'favorites' in st.session_state and st.session_state.favorites:
+                st.markdown("### Your Favorite Words:")
+                for fav_word in st.session_state.favorites:
+                    st.write(f"- {fav_word}")
 
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-
-# # Add a section for word of the day
-# if st.button("Show Word of the Day"):
-#     word_of_the_day = "serendipity"  # You can implement logic to change this daily
-#     st.markdown(f"### Word of the Day: {word_of_the_day}")
-#     with st.spinner("Fetching explanation for Word of the Day..."):
-#         explanation = explain_word(word_of_the_day)
-#     st.markdown(explanation)
-#
-# # Add a quiz feature
-# if st.button("Take a Quick Quiz"):
-#     quiz_word = "eloquent"  # You can implement logic to randomize this
-#     st.markdown(f"### Quiz: Can you use the word '{quiz_word}' in a sentence?")
-#     user_sentence = st.text_input("Your sentence:")
-#     if user_sentence:
-#         st.markdown("Great effort! Here's a model sentence:")
-#         st.markdown(f"*The grandfather became more eloquent in English after using this app regularly.*")
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
